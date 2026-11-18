@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-export default function Header() {
+export default function Header({ path, user, simple }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="header">
       <div className="container header-content">
-        <a className="logo" href="#home">
+        <a className="logo" href="#/">
           Pawnd<span>Me</span>
         </a>
 
-        <button
+        {!simple && <><button
           className="menu-toggle"
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
@@ -20,23 +20,23 @@ export default function Header() {
         </button>
 
         <nav className={`nav ${menuOpen ? "nav-open" : ""}`}>
-          <a href="#home" onClick={() => setMenuOpen(false)}>
+          <a href="#/" aria-current={path === "/" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             Home
           </a>
-          <a href="#pets" onClick={() => setMenuOpen(false)}>
+          <a href="#/pets" aria-current={path === "/pets" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             Explore Pets
           </a>
-          <a href="#favorites" onClick={() => setMenuOpen(false)}>
+          {user?.account_type !== "shelter_staff" && <a href="#/favorites" aria-current={path === "/favorites" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             Favorites
-          </a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>
+          </a>}
+          <a href="#/about" aria-current={path === "/about" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             About Us
           </a>
         </nav>
 
-        <a href="#login" className="login-btn">
-          Login/Register
-        </a>
+        <a href={user ? "#/account" : "#/login"} className="login-btn">
+          {user ? "My Account" : "Login/Register"}
+        </a></>}
       </div>
     </header>
   );

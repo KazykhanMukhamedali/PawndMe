@@ -1,62 +1,19 @@
-import { useEffect, useState } from "react";
-import PetCard from "./PetCard";
-import { getFeaturedPets } from "../services/pets";
+import { Load, useApi } from "./PageControls";
+import { PetGrid } from "../pages/Pets";
 
-export default function FeaturedPets() {
-  const [pets, setPets] = useState([]);
-  const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function loadPets() {
-      try {
-        const data = await getFeaturedPets();
-        setPets(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadPets();
-  }, []);
-
-  function toggleFavorite(id) {
-    setFavorites((previous) =>
-      previous.includes(id)
-        ? previous.filter((item) => item !== id)
-        : [...previous, id]
-    );
-  }
-
+export default function FeaturedPets({ account }) {
+  const state = useApi("/animals/", account.token);
   return (
     <section className="featured section" id="pets">
       <div className="container">
         <h2 className="section-title">Featured Friends</h2>
-
         <div className="section-link">
-          <a href="#all-pets" className="outline-btn">
-            View all pets →
-          </a>
+          <a href="#/pets" className="outline-btn">View all pets →</a>
         </div>
-
-        {loading && <p>Loading pets...</p>}
-        {error && <p role="alert">{error}</p>}
-
-        {!loading && !error && (
-          <div className="pets-grid">
-            {pets.map((pet) => (
-              <PetCard
-                key={pet.id}
-                pet={pet}
-                isFavorite={favorites.includes(pet.id)}
-                onToggleFavorite={toggleFavorite}
-              />
-            ))}
-          </div>
-        )}
+        <Load state={state}>{({ results }) => (
+          <PetGrid pets={results.filter((pet) => pet.status === "available").slice(0, 4)} account={account}
+            empty="No pets are currently available for adoption." />
+        )}</Load>
       </div>
     </section>
   );

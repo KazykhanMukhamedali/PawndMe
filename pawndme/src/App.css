@@ -763,8 +763,3 @@
     min-height: 310px;
   }
 }
-
-.pet-card:nth-child(3) .pet-image img {
-  object-fit: cover;
-  object-position: center 35%;
-}

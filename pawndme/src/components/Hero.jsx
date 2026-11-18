@@ -20,11 +20,11 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a href="#pets" className="primary-btn">
+            <a href="#/pets" className="primary-btn">
               Explore Pets →
             </a>
 
-            <a href="#how-it-works" className="video-btn">
+            <a href="#/about?section=how-it-works" className="video-btn">
               <span className="play-icon">▶</span>
               How It Works
             </a>
@@ -52,13 +52,6 @@ export default function Hero() {
             <small>Meet your match today</small>
           </div>
 
-          <div className="adopted-badge">
-            <strong>28</strong>
-            <span>
-              Pets Adopted
-              <small>this week</small>
-            </span>
-          </div>
         </div>
       </div>
     </section>

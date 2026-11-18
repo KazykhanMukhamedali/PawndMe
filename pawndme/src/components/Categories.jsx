@@ -3,19 +3,19 @@ const categories = [
     name: "Dogs",
     image: "/images/category-dogs.jpg",
     className: "category-blue",
-    href: "#dogs",
+    href: "#/pets?type=dog",
   },
   {
     name: "Cats",
     image: "/images/category-cats.jpg",
     className: "category-pink",
-    href: "#cats",
+    href: "#/pets?type=cat",
   },
   {
     name: "Other Animals",
     image: null,
     className: "category-gray",
-    href: "#other-animals",
+    href: "#/pets?type=other",
   },
 ];
 

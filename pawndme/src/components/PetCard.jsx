@@ -1,20 +1,45 @@
-export default function PetCard({
-  pet,
-  isFavorite,
-  onToggleFavorite,
-}) {
+import { useState } from "react";
+import { api } from "../services/api";
+
+export default function PetCard({ pet, account, onRemoved }) {
+  const [favorite, setFavorite] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const isFavorite = favorite ?? pet.is_favorite;
+
+  async function toggleFavorite() {
+    if (!account.user) {
+      location.hash = account.loginLink.slice(1);
+      return;
+    }
+    setBusy(true);
+    setError("");
+    try {
+      await api(`/favorites/${pet.id}/`, {
+        token: account.token, method: isFavorite ? "DELETE" : "POST",
+      });
+      setFavorite(!isFavorite);
+      if (isFavorite) onRemoved?.();
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <article className="pet-card">
       <div className="pet-image">
-        <img src={pet.image} alt={pet.name} />
+        {pet.photos[0] ? <img src={pet.photos[0]} alt={pet.name} loading="lazy" /> :
+          <div className="photo-placeholder">No photo available</div>}
 
         <span
-          className={`pet-status ${pet.status.toLowerCase()}`}
+          className={`pet-status ${pet.status}`}
         >
-          {pet.status}
+          {pet.status_label}
         </span>
 
-        <button
+        {account.user?.account_type !== "shelter_staff" && <button
           type="button"
           className={`favorite-btn ${isFavorite ? "active" : ""}`}
           aria-label={
@@ -23,33 +48,35 @@ export default function PetCard({
               : `Add ${pet.name} to favorites`
           }
           aria-pressed={isFavorite}
-          onClick={() => onToggleFavorite(pet.id)}
+          onClick={toggleFavorite}
+          disabled={busy}
         >
           {isFavorite ? "♥" : "♡"}
-        </button>
+        </button>}
       </div>
 
       <div className="pet-info">
         <div className="pet-heading">
           <div>
             <h3>{pet.name}</h3>
-            <p>{pet.breed}</p>
+            <p className="pet-facts">{pet.type}</p>
           </div>
           <span className="paw-icon">🐾</span>
         </div>
 
-        <div className="pet-details">
-          <span>{pet.age}</span>
-          <span>{pet.gender}</span>
+        <div className="pet-details pet-facts">
+          <span>{pet.age ? `${pet.age} yr` : "Under 1 yr"}</span>
+          {pet.personality && <span>{pet.personality}</span>}
           <span>{pet.size}</span>
         </div>
 
         <div className="pet-footer">
           <span>⌖ {pet.location}</span>
-          <a href={`#pet-${pet.id}`}>
+          <a href={`#/pets/${pet.id}`}>
             View Profile →
           </a>
         </div>
+        {error && <p className="form-error" role="alert">{error}</p>}
       </div>
     </article>
   );
