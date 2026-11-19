@@ -10,3 +10,16 @@ export default function Paw({ className = "", style }) {
     </svg>
   );
 }
+
+// Paw prints scattered over a banner background.
+// Each item is [color, top, left, size, rotation]; color is pink, beige or blue.
+export function PawScatter({ paws }) {
+  return (
+    <div className="paw-scatter" aria-hidden="true">
+      {paws.map(([color, top, left, size, angle], index) => (
+        <Paw key={index} className={`paw-${color}`}
+          style={{ top, left, width: size, height: size, transform: `rotate(${angle}deg)` }} />
+      ))}
+    </div>
+  );
+}
