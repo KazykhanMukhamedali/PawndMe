@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import Paw from "./Paw";
+import { PawScatter } from "./Paw";
 
 // [color, top, left, size, rotation] for the paw prints scattered over the hero
 const heroPaws = [
@@ -17,12 +17,7 @@ const heroPaws = [
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      <div className="hero-paws" aria-hidden="true">
-        {heroPaws.map(([color, top, left, size, angle], index) => (
-          <Paw key={index} className={`paw-${color}`}
-            style={{ top, left, width: size, height: size, transform: `rotate(${angle}deg)` }} />
-        ))}
-      </div>
+      <PawScatter paws={heroPaws} />
       <div className="container hero-content">
         <div className="hero-text">
           <span className="hero-tag">

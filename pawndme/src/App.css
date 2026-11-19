@@ -88,13 +88,13 @@
 }
 
 /* Paw prints scattered over the hero background */
-.hero-paws {
+.paw-scatter {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.hero-paws .paw {
+.paw-scatter .paw {
   position: absolute;
 }
 

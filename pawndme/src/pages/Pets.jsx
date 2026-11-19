@@ -1,10 +1,23 @@
 import { useState } from "react";
 import PetCard from "../components/PetCard";
+import { PawScatter } from "../components/Paw";
 import { ActionForm, Field, Load, any, personalities, sizes, types, useApi } from "../components/PageControls";
 import { api } from "../services/api";
 
 const ages = [["up_to_1", "Up to 1 year"], ["1_3", "2–3 years"], ["4_7", "4–7 years"], ["8_plus", "8+ years"]];
 const pageSize = 12;
+
+// [color, top, left, size, rotation] for the paws on the catalog banner
+const bannerPaws = [
+  ["beige", "22%", "8%", 34, -14],
+  ["pink", "52%", "14%", 32, -18],
+  ["pink", "8%", "63%", 34, 18],
+  ["beige", "32%", "36%", 26, 12],
+  ["beige", "36%", "90%", 34, 16],
+  ["pink", "50%", "77%", 32, 20],
+  ["beige", "58%", "67%", 32, -10],
+  ["blue", "14%", "24%", 18, -8],
+];
 
 export function PetGrid({ pets, account, empty = "No pets found.", onRemoved }) {
   if (!pets.length) return <p className="empty-state">{empty}</p>;
@@ -32,16 +45,25 @@ export function Catalog({ query, account }) {
     location.hash = `/pets${next.size ? `?${next}` : ""}`;
   }
 
+  const [resets, setResets] = useState(0);
+
+  function clearFilters() {
+    setResets(resets + 1);  // empties fields typed but not searched yet
+    location.hash = "/pets";
+  }
+
   return (
     <>
       <div className="catalog-banner">
+        <PawScatter paws={bannerPaws} />
         <div className="container">
+          <span className="hero-tag">Adopt. Love. Repeat.</span>
           <h1>Find Your Perfect <span>Companion</span></h1>
-          <p>Meet the pets waiting for a place to call home.</p>
+          <p>Every pet deserves a loving home. Use the filters below to meet the one who is waiting for you.</p>
         </div>
       </div>
       <section className="container browse-page">
-        <ActionForm key={params.toString()} onAction={filter} className="filter-form">
+        <ActionForm key={`${params}|${resets}`} onAction={filter} className="filter-form">
           <Field label="Search by name" name="search" type="search" placeholder="Enter a pet’s name" defaultValue={params.get("search") ?? ""} />
           <div className="filter-row">
             <Field label="Animal" name="type" options={any("All animals", types)} defaultValue={params.get("type") ?? ""} />
@@ -50,7 +72,7 @@ export function Catalog({ query, account }) {
             <Field label="Personality" name="personality" options={any("Any personality", personalities)} defaultValue={params.get("personality") ?? ""} />
             <Field label="Location" name="location" options={any("Any location", [...cityOptions].map((city) => [city, city]))} defaultValue={params.get("location") ?? ""} />
             <button className="primary-btn">Search</button>
-            <a href="#/pets">Clear</a>
+            <button type="button" className="clear-btn" onClick={clearFilters}>Clear all</button>
           </div>
         </ActionForm>
         <Load state={state}>{({ results }) => {

@@ -10,9 +10,16 @@
 .inner-page h2 { margin: 32px 0 12px; }
 
 .catalog-banner {
-  background: #e0edfb;
+  position: relative;
+  overflow: hidden;
+  background: #deefff;
   text-align: center;
-  padding: 64px 0 92px;
+  padding: 56px 0 92px;
+}
+
+.catalog-banner .container {
+  position: relative;
+  z-index: 1;
 }
 
 .catalog-banner h1,
@@ -21,8 +28,20 @@
   line-height: 1.12;
 }
 
-.catalog-banner h1 span { color: #995871; }
-.catalog-banner p { margin-top: 12px; }
+/* Same heading style as the home page hero */
+.catalog-banner h1 {
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #34445b;
+}
+.catalog-banner h1 span { color: #f2a9c2; }
+.catalog-banner p {
+  max-width: 560px;
+  margin: 14px auto 0;
+  color: #65788c;
+  font-size: 17px;
+  line-height: 1.6;
+}
 
 .browse-page { padding-top: 0; }
 
@@ -42,7 +61,18 @@ form fieldset { border: 0; min-width: 0; }
 .filter-form fieldset { display: grid; gap: 14px; }
 .filter-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .filter-row .field { flex: 1 1 125px; }
-.filter-row > a { padding: 10px; }
+.clear-btn {
+  padding: 11px 18px;
+  border: 1px solid #d4dce4;
+  border-radius: 9px;
+  background: white;
+  color: #34445b;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.clear-btn:hover { background: #f4f8fc; }
 
 .field {
   display: grid;
