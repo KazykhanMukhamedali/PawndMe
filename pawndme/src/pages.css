@@ -61,8 +61,19 @@ form fieldset { border: 0; min-width: 0; }
 .filter-form fieldset { display: grid; gap: 14px; }
 .filter-row { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
 .filter-row .field { flex: 1 1 125px; }
+/* Search and Clear all: same size as each other and as the select fields */
+.filter-row select { height: 44px; }
+.filter-row > button {
+  height: 44px;
+  min-width: 108px;
+  padding: 0 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 800;
+}
+.filter-row > .primary-btn { border: 1px solid #34445b; }
+
 .clear-btn {
-  padding: 11px 18px;
   border: 1px solid #d4dce4;
   border-radius: 9px;
   background: white;
