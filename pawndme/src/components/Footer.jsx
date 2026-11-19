@@ -1,5 +1,9 @@
+import Wave from "./Wave";
+
 export default function Footer() {
   return (
+    <>
+    <Wave variant="edge" />
     <footer className="footer">
       <div className="container">
         <div className="footer-grid site-footer-grid">
@@ -23,5 +27,6 @@ export default function Footer() {
         <div className="footer-bottom"><span>© PawndMe</span></div>
       </div>
     </footer>
+    </>
   );
 }

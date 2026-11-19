@@ -63,7 +63,7 @@ export default function PetCard({ pet, account, onRemoved }) {
             <h3>{pet.name}</h3>
             <p className="pet-facts">{pet.type}</p>
           </div>
-          <Paw className="paw-icon" />
+          <Paw className={`paw-icon paw-${pet.type}`} />
         </div>
 
         <div className="pet-details pet-facts">

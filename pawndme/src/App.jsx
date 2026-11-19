@@ -5,6 +5,7 @@ import FeaturedPets from "./components/FeaturedPets";
 import Categories from "./components/Categories";
 import HowItWorks from "./components/HowItWorks";
 import Footer from "./components/Footer";
+import Wave from "./components/Wave";
 import Auth, { isAuthPage } from "./pages/Auth";
 import { Account, AnimalEditor } from "./pages/Account";
 import { Catalog, Favorites, PetProfile } from "./pages/Pets";
@@ -80,7 +81,7 @@ export default function App() {
   let page;
   if (auth) page = <Auth key={route} path={path} query={query} onLogin={login} />;
   else if (token && !user && !sessionError) page = <p className="container section" role="status">Loading account…</p>;
-  else if (path === "/") page = <><Hero /><FeaturedPets account={account} /><Categories /><HowItWorks /></>;
+  else if (path === "/") page = <><Hero /><FeaturedPets account={account} /><Wave /><Categories /><Wave /><HowItWorks /></>;
   else if (path === "/about") page = <><Hero /><HowItWorks /></>;
   else if (path === "/pets") page = <Catalog query={query} account={account} />;
   else if (pet) page = <PetProfile key={pet[1]} id={pet[1]} account={account} />;

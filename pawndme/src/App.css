@@ -374,7 +374,6 @@
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  color: #f2a9c2;
 }
 
 .pet-details {
@@ -407,13 +406,7 @@
 /* CATEGORIES */
 
 .categories {
-  background: linear-gradient(
-    to bottom,
-    #deefff 0%,
-    #deefff 16%,
-    white 16%,
-    white 100%
-  );
+  background: white;
 }
 
 .category-grid {
@@ -455,7 +448,23 @@
   display: block;
   width: 30px;
   height: 30px;
-  color: #5f7f9c;
+}
+
+/* Paw color by animal type: dogs blue, cats pink, others beige */
+.paw-dog { color: #5f7f9c; }
+.paw-cat { color: #f2a9c2; }
+.paw-other { color: #c9c2b4; }
+
+/* Wavy light-blue dividers between sections */
+.wave {
+  display: block;
+  width: 100%;
+  height: clamp(50px, 7vw, 100px);
+  fill: #deefff;
+}
+
+.wave-edge {
+  margin-bottom: -1px;
 }
 
 .category-card h3 {
@@ -477,7 +486,7 @@
 /* HOW IT WORKS */
 
 .how-it-works {
-  background: #f9fcff;
+  background: white;
   padding-top: 95px;
   padding-bottom: 110px;
 }

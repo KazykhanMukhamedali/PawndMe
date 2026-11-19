@@ -5,18 +5,21 @@ const categories = [
     name: "Dogs",
     image: "/images/category-dogs.jpg",
     className: "category-blue",
+    paw: "paw-dog",
     href: "#/pets?type=dog",
   },
   {
     name: "Cats",
     image: "/images/category-cats.jpg",
     className: "category-pink",
+    paw: "paw-cat",
     href: "#/pets?type=cat",
   },
   {
     name: "Other Animals",
     image: null,
     className: "category-gray",
+    paw: "paw-other",
     href: "#/pets?type=other",
   },
 ];
@@ -37,7 +40,7 @@ export default function Categories() {
               className={`category-card ${category.className}`}
             >
               <div className="category-text">
-                <Paw className="category-paw" />
+                <Paw className={`category-paw ${category.paw}`} />
                 <h3>{category.name}</h3>
               </div>
 
