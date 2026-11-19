@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { api } from "../services/api";
+import Paw from "./Paw";
 
 export default function PetCard({ pet, account, onRemoved }) {
   const [favorite, setFavorite] = useState(null);
@@ -61,7 +63,7 @@ export default function PetCard({ pet, account, onRemoved }) {
             <h3>{pet.name}</h3>
             <p className="pet-facts">{pet.type}</p>
           </div>
-          <span className="paw-icon">🐾</span>
+          <Paw className="paw-icon" />
         </div>
 
         <div className="pet-details pet-facts">
@@ -73,7 +75,7 @@ export default function PetCard({ pet, account, onRemoved }) {
         <div className="pet-footer">
           <span>⌖ {pet.location}</span>
           <a href={`#/pets/${pet.id}`}>
-            View Profile →
+            View Profile <ArrowRight size={14} aria-hidden="true" />
           </a>
         </div>
         {error && <p className="form-error" role="alert">{error}</p>}

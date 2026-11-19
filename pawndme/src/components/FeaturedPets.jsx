@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { Load, useApi } from "./PageControls";
 import { PetGrid } from "../pages/Pets";
 
@@ -8,7 +9,7 @@ export default function FeaturedPets({ account }) {
       <div className="container">
         <h2 className="section-title">Featured Friends</h2>
         <div className="section-link">
-          <a href="#/pets" className="outline-btn">View all pets →</a>
+          <a href="#/pets" className="outline-btn">View all pets <ArrowRight size={14} aria-hidden="true" /></a>
         </div>
         <Load state={state}>{({ results }) => (
           <PetGrid pets={results.filter((pet) => pet.status === "available").slice(0, 4)} account={account}

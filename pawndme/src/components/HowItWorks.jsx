@@ -1,3 +1,5 @@
+import Paw from "./Paw";
+
 const steps = [
   {
     number: "01",
@@ -25,7 +27,7 @@ const steps = [
   },
   {
     number: "04",
-    icon: "🐾",
+    icon: <Paw />,
     title: "Welcome Them Home",
     description:
       "Meet your new best friend and begin your story.",

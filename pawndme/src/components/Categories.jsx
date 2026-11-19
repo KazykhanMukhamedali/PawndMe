@@ -1,3 +1,5 @@
+import Paw from "./Paw";
+
 const categories = [
   {
     name: "Dogs",
@@ -35,7 +37,7 @@ export default function Categories() {
               className={`category-card ${category.className}`}
             >
               <div className="category-text">
-                <span className="category-paw">🐾</span>
+                <Paw className="category-paw" />
                 <h3>{category.name}</h3>
               </div>
 

@@ -51,6 +51,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
 }
 
 .login-btn:hover,
@@ -86,7 +87,24 @@
   border-radius: 50% 50% 0 0;
 }
 
+/* Paw prints scattered over the hero background */
+.hero-paws {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-paws .paw {
+  position: absolute;
+}
+
+.paw-pink { color: #f7b3c7; }
+.paw-beige { color: #fbfaf7; opacity: 0.85; }
+.paw-blue { color: #6a87a3; opacity: 0.45; }
+
 .hero-content {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -251,6 +269,9 @@
 }
 
 .outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 1px solid #d4dce4;
   padding: 9px 18px;
   border-radius: 24px;
@@ -350,7 +371,10 @@
 }
 
 .paw-icon {
-  font-size: 20px;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #f2a9c2;
 }
 
 .pet-details {
@@ -373,6 +397,9 @@
 }
 
 .pet-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 900;
   color: #64859b;
 }
@@ -425,7 +452,10 @@
 }
 
 .category-paw {
-  font-size: 28px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  color: #5f7f9c;
 }
 
 .category-card h3 {
@@ -478,6 +508,11 @@
 
 .step {
   text-align: center;
+}
+
+.step-icon .paw {
+  width: 52px;
+  height: 52px;
 }
 
 .step-icon {
